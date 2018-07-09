@@ -3,15 +3,12 @@
 100:
   message: "Continue"
   category: "Informational Responses"
-  description: "This interim response indicates that everything so far is OK \
-                and that the client should continue with the request or ignore \
-                it if it is already finished."
+  description: "Confirmation of the initial request to send a response body. The origin server is willing to accept the request (based on the request headers). This is returned before the client typically sends the response body. This prevents clients from sending unnecessary or unusable data. Required from server: If the client sends Expect: 100-continue header, the server must respond immediately with either 100 Continue and continue to read from the input stream or send another response code. Cloudflare uses Keep-Alive connections so this response should not be necessary" 
 
 101:
   message: "Switching Protocol"
   category: "Informational Responses"
-  description: "This code is sent in response to an Upgrade request header by \
-                the client, and indicates the protocol the server is switching to."
+  description: "Origin server accepts the client’s request to switch protocols. Client request either contained Upgrade in a header field or there was a change in the application protocol being used on this connection. If using Upgrade header field, the server has agreed to upgrade to a protocol that is higher on the client’s priority list than the current protocol being used. Origin server must also respond with a Upgrade header field to indicate the new protocol(s) to which the connection is being switched It is assumed that this switch will be advantageous to both the client and the server. Most common use case is with websockets. For information about Cloudflare’s Websockets see: Cloudflare Now Supports Websockets." 
 
 102:
   message: "Processing (WebDAV)"
@@ -28,15 +25,17 @@
 200:
   message: "OK"
   category: "Successful Responses"
-  description: "The request has succeeded. The meaning of a success varies \
-                depending on the HTTP method:
-                GET: The resource has been fetched and is transmitted in the \
-                message body.
-                HEAD: The entity headers are in the message body.
-                PUT or POST: The resource describing the result of the action is \
-                transmitted in the message body.
-                TRACE: The message body contains the request message as received \
-                by the server"
+  description: "Everyone’s favorite response: the request has succeeded.\n
+\nThe response payload will depend on the request method used. The expected response body for the corresponding request method is as follows:
+
+      GET -  the headers and data corresponding to the requested resource
+      HEAD - just the headers corresponding the requested resource without the actual data
+      POST - the status of, or results obtained from the action
+      A 200 response should always have a payload but is not required, thus an origin server may generate a 200 with a zero length. To adhere to RFC standards a 204 should be generated in that case (exception CONNECT)
+
+      Cacheable by default by proxy servers and browsers. If not specified by Cloudflare cache controls,   static resources with this response will cache default for 2 hours at our edge." 
+
+
 
 # Successful Responses
 
