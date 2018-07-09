@@ -25,62 +25,39 @@
 200:
   message: "OK"
   category: "Successful Responses"
-  description: "Everyone’s favorite response: the request has succeeded.\n
-\nThe response payload will depend on the request method used. The expected response body for the corresponding request method is as follows:
-
-      GET -  the headers and data corresponding to the requested resource
-      HEAD - just the headers corresponding the requested resource without the actual data
-      POST - the status of, or results obtained from the action
-      A 200 response should always have a payload but is not required, thus an origin server may generate a 200 with a zero length. To adhere to RFC standards a 204 should be generated in that case (exception CONNECT)
-
-      Cacheable by default by proxy servers and browsers. If not specified by Cloudflare cache controls,   static resources with this response will cache default for 2 hours at our edge." 
-
-
+  description: "Everyone’s favorite response: the request has succeeded.\n\nThe response payload will depend on the request method used. The expected response body for the corresponding request method is as follows:\n\nGET -  the headers and data corresponding to the requested resource\nHEAD - just the headers corresponding the requested resource without the actual data\nPOST - the status of, or results obtained from the action\nA 200 response should always have a payload but is not required, thus an origin server may generate a 200 with a zero length. To adhere to RFC standards a 204 should be generated in that case (exception CONNECT)\n\nCacheable by default by proxy servers and browsers. If not specified by Cloudflare cache controls,   static resources with this response will cache default for 2 hours at our edge."
 
 # Successful Responses
 
 201:
   message: "Created"
   category: "Successful Responses"
-  description: "The request has succeeded and a new resource has been created as \
-                a result of it. This is typically the response sent after a POST \
-                request, or after some PUT requests."
+  description: "Request was successful and there are one or more new resources being created. The new resource’s location is expected to be present at either the Location header field or by the request’s URI. Typically, the payload will describe and reference links to the newly generated resource.\n\nSee RFC 7231 Section 7.2 for a discussion of the meaning and purpose of validator header fields, such as ETag and Last-Modified, in a 201 response."
 
 202:
   message: "Accepted"
   category: "Successful Responses"
-  description: "The request has been received but not yet acted upon. It is \
-                non-committal, meaning that there is no way in HTTP to later send \
-                an asynchronous response indicating the outcome of processing the \
-                request. It is intended for cases where another process or server \
-                handles the request, or for batch processing."
+  description: "Request was accepted and is currently being processed by the origin server.  Depending on server’s specifications, the client may or may not act on the request while processing actually takes place."
 
 203:
   message: "Non-Authoritative Information"
   category: "Successful Responses"
-  description: "This response code means returned meta-information set is not \
-                exact set as available from the origin server, but collected from \
-                a local or a third party copy. Except this condition, 200 OK \
-                response should be preferred instead of this response."
+  description: "Optional replacement of the 200 status code to explain the request was successful but did not come directly from the origin server. Original origin server response has been modified by a proxy or intermediate server. For example, 203’s could be used to inform the client that this resource has been cached at a proxy so a similar future request may or may not hit that cache server with that identical resource. Another example is when a header that is only applicable to the local origin server is stripped.\n\nIs cacheable response by default, however, Cloudflare will not cache.\nCloudflare will never generate but may proxy from other proxies if present. Cloudflare respects origins responses with these exceptions: How does Cloudflare handle HTTP Request headers."
 
 204:
   message: "No Content"
   category: "Successful Responses"
-  description: "There is no content to send for this request, but the headers \
-                may be useful. The user-agent may update its cached headers for \
-                this resource with the new ones."
+  description: "Requested actions were performed correctly at the origin server. The common use case is in document editors the “save” action is sent to the origin server, yet no payload is needed to be returned to the client. One still might want to alert the user that the save was successful.\n\nThere must never be a payload when returning a 204 response.\nIs cacheable response by default, however, Cloudflare will not cache."
 
 205:
   message: "Reset Content"
   category: "Successful Responses"
-  description: "This response code is sent after accomplishing request to tell \
-                user agent reset document view which sent this request."
+  description: "Origin server suggests the client reset the view to its original state prior to the request. Often used in forms or other input submissions were a payload is sent in the request, the origin server operated successfully and now is notifying the browser that additional submissions are permitted.\n\nA 205 response must never return a payload. Content-Length of 0 or chunked responses immediately followed by a close or zero-byte response allowed only."
 
 206:
   message: "Partial Content"
   category: "Successful Responses"
-  description: "This response code is used because of range header sent by the \
-                client to separate download into multiple streams."
+  description: "Request for a part of a resource was successful and is located in the payload. The request must have indicated the range by either of the following:\n\nA single partial request with HTTP headers including Content Range followed by size. (If present in response header must be exactly equal to the octets in the payload) E.g. Content Range: bytes 21010-47021/47022\n\nMultiple chunks with Content-Type: multipart/byteranges in HTTP header and including Content-Range fields for each part individually but not in the response HTTP header. Boundary also required as specified by RFC 7233 Section 4.1 e.g\n\nHTTP/1.1 206 Partial Content\nDate: Wed, 15 Nov 1995 06:25:24 GMT\nLast-Modified: Wed, 15 Nov 1995 04:58:08 GMT\nContent-Length: 1741\nContent-Type: multipart/byteranges; boundary=THIS_STRING_SEPARATES\n\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 500-999/8000\n\n...the first range...\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 7000-7999/8000\n\n...the second range\n--THIS_STRING_SEPARATES--\n\n206’s are useful for clients processing larger files that require split or interrupted downloads with multiple simultaneous streams for improved latency."
 
 207:
   message: "Multi-Status (WebDav)"
@@ -108,30 +85,22 @@
 300:
   message: "Multiple Choice"
   category: "Redirection Messages"
-  description: "The request has more than one possible response. The user-agent \
-                or user should choose one of them. There is no standardized way \
-                of choosing one of the responses."
+  description: "Multiple options for the resource that the client may follow. For instance, it could be used to present different format options for video, list files with different extensions, or word sense disambiguation."
 
 301:
   message: "Moved Permanently"
   category: "Redirection Messages"
-  description: "This response code means that the URI of the requested resource \
-                has been changed. Probably, the new URI would be given in the \
-                response."
+  description: "Permanent URL redirect for the resource requested.The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding"
 
 302:
   message: "Found"
   category: "Redirection Messages"
-  description: "This response code means that the URI of requested resource has \
-                been changed temporarily. New changes in the URI might be made \
-                in the future. Therefore, this same URI should be used by the \
-                client in future requests."
+  description: "Similar to a 301 redirect, but is intended for temporary purposes only. User-Agent may automatically follow the Location header, but should not replace the current URI  with it as a 301.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding"
 
 303:
   message: "See Other"
   category: "Redirection Messages"
-  description: "The server sent this response to direct the client to get the \
-                requested resource at another URI with a GET request."
+  description: "User-Agent should follow this redirect with a GET request. Note: differs from 301 in that the  resource at the redirect is not necessarily equivalent to what was requested\n\n-- Intended to be used in response to a POST/DELETE request to signal the origin server received data correctly and to allow appropriate cache behaviour.\n-- The original 303 response is not cacheable, but the response to the 2nd request (GET) may be since it’s under a different URI."
 
 304:
   message: "Not Modified"
