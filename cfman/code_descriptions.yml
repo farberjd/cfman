@@ -1,420 +1,399 @@
 # Informational Responses
 
 100:
-  message: "Continue"
-  category: "Informational Responses"
-  description: "Confirmation of the initial request to send a response body. The origin server is willing to accept the request (based on the request headers). This is returned before the client typically sends the response body. This prevents clients from sending unnecessary or unusable data. Required from server: If the client sends Expect: 100-continue header, the server must respond immediately with either 100 Continue and continue to read from the input stream or send another response code. Cloudflare uses Keep-Alive connections so this response should not be necessary" 
+  message: 'Continue'
+  category: 'Informational Responses'
+  description: 'Confirmation of the initial request to send a response body. The origin server is willing to accept the request (based on the request headers). This is returned before the client typically sends the response body. This prevents clients from sending unnecessary or unusable data. Required from server: If the client sends Expect: 100-continue header, the server must respond immediately with either 100 Continue and continue to read from the input stream or send another response code. Cloudflare uses Keep-Alive connections so this response should not be necessary' 
 
 101:
-  message: "Switching Protocol"
-  category: "Informational Responses"
-  description: "Origin server accepts the client’s request to switch protocols. Client request either contained Upgrade in a header field or there was a change in the application protocol being used on this connection. If using Upgrade header field, the server has agreed to upgrade to a protocol that is higher on the client’s priority list than the current protocol being used. Origin server must also respond with a Upgrade header field to indicate the new protocol(s) to which the connection is being switched It is assumed that this switch will be advantageous to both the client and the server. Most common use case is with websockets. For information about Cloudflare’s Websockets see: Cloudflare Now Supports Websockets." 
+  message: 'Switching Protocol'
+  category: 'Informational Responses'
+  description: 'Origin server accepts the client’s request to switch protocols. Client request either contained Upgrade in a header field or there was a change in the application protocol being used on this connection. If using Upgrade header field, the server has agreed to upgrade to a protocol that is higher on the client’s priority list than the current protocol being used. Origin server must also respond with a Upgrade header field to indicate the new protocol(s) to which the connection is being switched It is assumed that this switch will be advantageous to both the client and the server. Most common use case is with websockets. For information about Cloudflare’s Websockets see: Cloudflare Now Supports Websockets.' 
 
 102:
-  message: "Processing (WebDAV)"
-  category: "Informational Responses"
-  description: "This code indicates that the server has received and is \
-                processing the request, but no response is available yet."
+  message: 'Processing (WebDAV)'
+  category: 'Informational Responses'
+  description: 'This code indicates that the server has received and is \
+                processing the request, but no response is available yet.'
 
 102:
-  message: "Processing (WebDAV)"
-  category: "Informational Responses"
-  description: "This code indicates that the server has received and is \
-                processing the request, but no response is available yet."
+  message: 'Processing (WebDAV)'
+  category: 'Informational Responses'
+  description: 'This code indicates that the server has received and is \
+                processing the request, but no response is available yet.'
 
 200:
-  message: "OK"
-  category: "Successful Responses"
-  description: "Everyone’s favorite response: the request has succeeded.\n\nThe response payload will depend on the request method used. The expected response body for the corresponding request method is as follows:\n\nGET -  the headers and data corresponding to the requested resource\nHEAD - just the headers corresponding the requested resource without the actual data\nPOST - the status of, or results obtained from the action\nA 200 response should always have a payload but is not required, thus an origin server may generate a 200 with a zero length. To adhere to RFC standards a 204 should be generated in that case (exception CONNECT)\n\nCacheable by default by proxy servers and browsers. If not specified by Cloudflare cache controls,   static resources with this response will cache default for 2 hours at our edge."
+  message: 'OK'
+  category: 'Successful Responses'
+  description: 'Everyone’s favorite response: the request has succeeded.\n\nThe response payload will depend on the request method used. The expected response body for the corresponding request method is as follows:\n\nGET -  the headers and data corresponding to the requested resource\nHEAD - just the headers corresponding the requested resource without the actual data\nPOST - the status of, or results obtained from the action\nA 200 response should always have a payload but is not required, thus an origin server may generate a 200 with a zero length. To adhere to RFC standards a 204 should be generated in that case (exception CONNECT)\n\nCacheable by default by proxy servers and browsers. If not specified by Cloudflare cache controls,   static resources with this response will cache default for 2 hours at our edge.'
 
 # Successful Responses
 
 201:
-  message: "Created"
-  category: "Successful Responses"
-  description: "Request was successful and there are one or more new resources being created. The new resource’s location is expected to be present at either the Location header field or by the request’s URI. Typically, the payload will describe and reference links to the newly generated resource.\n\nSee RFC 7231 Section 7.2 for a discussion of the meaning and purpose of validator header fields, such as ETag and Last-Modified, in a 201 response."
+  message: 'Created'
+  category: 'Successful Responses'
+  description: 'Request was successful and there are one or more new resources being created. The new resource’s location is expected to be present at either the Location header field or by the request’s URI. Typically, the payload will describe and reference links to the newly generated resource.\n\nSee RFC 7231 Section 7.2 for a discussion of the meaning and purpose of validator header fields, such as ETag and Last-Modified, in a 201 response.'
 
 202:
-  message: "Accepted"
-  category: "Successful Responses"
-  description: "Request was accepted and is currently being processed by the origin server.  Depending on server’s specifications, the client may or may not act on the request while processing actually takes place."
+  message: 'Accepted'
+  category: 'Successful Responses'
+  description: 'Request was accepted and is currently being processed by the origin server.  Depending on server’s specifications, the client may or may not act on the request while processing actually takes place.'
 
 203:
-  message: "Non-Authoritative Information"
-  category: "Successful Responses"
-  description: "Optional replacement of the 200 status code to explain the request was successful but did not come directly from the origin server. Original origin server response has been modified by a proxy or intermediate server. For example, 203’s could be used to inform the client that this resource has been cached at a proxy so a similar future request may or may not hit that cache server with that identical resource. Another example is when a header that is only applicable to the local origin server is stripped.\n\nIs cacheable response by default, however, Cloudflare will not cache.\nCloudflare will never generate but may proxy from other proxies if present. Cloudflare respects origins responses with these exceptions: How does Cloudflare handle HTTP Request headers."
+  message: 'Non-Authoritative Information'
+  category: 'Successful Responses'
+  description: 'Optional replacement of the 200 status code to explain the request was successful but did not come directly from the origin server. Original origin server response has been modified by a proxy or intermediate server. For example, 203’s could be used to inform the client that this resource has been cached at a proxy so a similar future request may or may not hit that cache server with that identical resource. Another example is when a header that is only applicable to the local origin server is stripped.\n\nIs cacheable response by default, however, Cloudflare will not cache.\nCloudflare will never generate but may proxy from other proxies if present. Cloudflare respects origins responses with these exceptions: How does Cloudflare handle HTTP Request headers.'
 
 204:
-  message: "No Content"
-  category: "Successful Responses"
-  description: "Requested actions were performed correctly at the origin server. The common use case is in document editors the “save” action is sent to the origin server, yet no payload is needed to be returned to the client. One still might want to alert the user that the save was successful.\n\nThere must never be a payload when returning a 204 response.\nIs cacheable response by default, however, Cloudflare will not cache."
+  message: 'No Content'
+  category: 'Successful Responses'
+  description: 'Requested actions were performed correctly at the origin server. The common use case is in document editors the “save” action is sent to the origin server, yet no payload is needed to be returned to the client. One still might want to alert the user that the save was successful.\n\nThere must never be a payload when returning a 204 response.\nIs cacheable response by default, however, Cloudflare will not cache.'
 
 205:
-  message: "Reset Content"
-  category: "Successful Responses"
-  description: "Origin server suggests the client reset the view to its original state prior to the request. Often used in forms or other input submissions were a payload is sent in the request, the origin server operated successfully and now is notifying the browser that additional submissions are permitted.\n\nA 205 response must never return a payload. Content-Length of 0 or chunked responses immediately followed by a close or zero-byte response allowed only."
+  message: 'Reset Content'
+  category: 'Successful Responses'
+  description: 'Origin server suggests the client reset the view to its original state prior to the request. Often used in forms or other input submissions were a payload is sent in the request, the origin server operated successfully and now is notifying the browser that additional submissions are permitted.\n\nA 205 response must never return a payload. Content-Length of 0 or chunked responses immediately followed by a close or zero-byte response allowed only.'
 
 206:
-  message: "Partial Content"
-  category: "Successful Responses"
-  description: "Request for a part of a resource was successful and is located in the payload. The request must have indicated the range by either of the following:\n\nA single partial request with HTTP headers including Content Range followed by size. (If present in response header must be exactly equal to the octets in the payload) E.g. Content Range: bytes 21010-47021/47022\n\nMultiple chunks with Content-Type: multipart/byteranges in HTTP header and including Content-Range fields for each part individually but not in the response HTTP header. Boundary also required as specified by RFC 7233 Section 4.1 e.g\n\nHTTP/1.1 206 Partial Content\nDate: Wed, 15 Nov 1995 06:25:24 GMT\nLast-Modified: Wed, 15 Nov 1995 04:58:08 GMT\nContent-Length: 1741\nContent-Type: multipart/byteranges; boundary=THIS_STRING_SEPARATES\n\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 500-999/8000\n\n...the first range...\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 7000-7999/8000\n\n...the second range\n--THIS_STRING_SEPARATES--\n\n206’s are useful for clients processing larger files that require split or interrupted downloads with multiple simultaneous streams for improved latency."
+  message: 'Partial Content'
+  category: 'Successful Responses'
+  description: 'Request for a part of a resource was successful and is located in the payload. The request must have indicated the range by either of the following:\n\nA single partial request with HTTP headers including Content Range followed by size. (If present in response header must be exactly equal to the octets in the payload) E.g. Content Range: bytes 21010-47021/47022\n\nMultiple chunks with Content-Type: multipart/byteranges in HTTP header and including Content-Range fields for each part individually but not in the response HTTP header. Boundary also required as specified by RFC 7233 Section 4.1 e.g\n\nHTTP/1.1 206 Partial Content\nDate: Wed, 15 Nov 1995 06:25:24 GMT\nLast-Modified: Wed, 15 Nov 1995 04:58:08 GMT\nContent-Length: 1741\nContent-Type: multipart/byteranges; boundary=THIS_STRING_SEPARATES\n\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 500-999/8000\n\n...the first range...\n--THIS_STRING_SEPARATES\nContent-Type: application/pdf\nContent-Range: bytes 7000-7999/8000\n\n...the second range\n--THIS_STRING_SEPARATES--\n\n206’s are useful for clients processing larger files that require split or interrupted downloads with multiple simultaneous streams for improved latency.'
 
 207:
-  message: "Multi-Status (WebDav)"
-  category: "Successful Responses"
-  description: "A Multi-Status response conveys information about multiple \
+  message: 'Multi-Status (WebDav)'
+  category: 'Successful Responses'
+  description: 'A Multi-Status response conveys information about multiple \
                 resources in situations where multiple status codes might be \
-                appropriate."
+                appropriate.'
 
 208:
-  message: "Multi-Status (WebDav)"
-  category: "Successful Responses"
-  description: "Used inside a DAV: propstat response element to avoid enumerating \
+  message: 'Multi-Status (WebDav)'
+  category: 'Successful Responses'
+  description: 'Used inside a DAV: propstat response element to avoid enumerating \
                 the internal members of multiple bindings to the same collection \
-                repeatedly."
+                repeatedly.'
 
 226:
-  message: "IM Used (HTTP Delta encoding)"
-  category: "Successful Responses"
-  description: "The server has fulfilled a GET request for the resource, and the \
+  message: 'IM Used (HTTP Delta encoding)'
+  category: 'Successful Responses'
+  description: 'The server has fulfilled a GET request for the resource, and the \
                 response is a representation of the result of one or more \
-                instance-manipulations applied to the current instance."
+                instance-manipulations applied to the current instance.'
 
 # Redirection Messages
 
 300:
-  message: "Multiple Choice"
-  category: "Redirection Messages"
-  description: "Multiple options for the resource that the client may follow. For instance, it could be used to present different format options for video, list files with different extensions, or word sense disambiguation."
+  message: 'Multiple Choice'
+  category: 'Redirection Messages'
+  description: 'Multiple options for the resource that the client may follow. For instance, it could be used to present different format options for video, list files with different extensions, or word sense disambiguation.'
 
 301:
-  message: "Moved Permanently"
-  category: "Redirection Messages"
-  description: "Permanent URL redirect for the resource requested.The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding"
+  message: 'Moved Permanently'
+  category: 'Redirection Messages'
+  description: 'Permanent URL redirect for the resource requested.The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding'
 
 302:
-  message: "Found"
-  category: "Redirection Messages"
-  description: "Similar to a 301 redirect, but is intended for temporary purposes only. User-Agent may automatically follow the Location header, but should not replace the current URI  with it as a 301.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding"
+  message: 'Found'
+  category: 'Redirection Messages'
+  description: 'Similar to a 301 redirect, but is intended for temporary purposes only. User-Agent may automatically follow the Location header, but should not replace the current URI  with it as a 301.\n\nCloudflare is able to generate these responses, thus avoiding the need to send a request to the origin server’s response through the use of Page rules. Read more How Cloudflare can help generate redirects at Page Rules URL Forwarding'
 
 303:
-  message: "See Other"
-  category: "Redirection Messages"
-  description: "User-Agent should follow this redirect with a GET request. Note: differs from 301 in that the  resource at the redirect is not necessarily equivalent to what was requested\n\n-- Intended to be used in response to a POST/DELETE request to signal the origin server received data correctly and to allow appropriate cache behaviour.\n-- The original 303 response is not cacheable, but the response to the 2nd request (GET) may be since it’s under a different URI."
+  message: 'See Other'
+  category: 'Redirection Messages'
+  description: 'User-Agent should follow this redirect with a GET request. Note: differs from 301 in that the  resource at the redirect is not necessarily equivalent to what was requested\n\n-- Intended to be used in response to a POST/DELETE request to signal the origin server received data correctly and to allow appropriate cache behaviour.\n-- The original 303 response is not cacheable, but the response to the 2nd request (GET) may be since it’s under a different URI.'
 
 304:
-  message: "Not Modified"
-  category: "Redirection Messages"
-  description: "This is used for caching purposes. It tells the client that the \
-                response has not been modified, so the client can continue to \
-                use the same cached version of the response."
+  message: 'Not Modified'
+  category: 'Redirection Messages'
+  description: 'Signal to the client that the requested resource is available and valid in the cache. The origin server has not modified the resource that the request inquired about. Client can receive the payload for the specified resource without connecting to the origin server again thus it is redirecting the request to use the stored resource.  Requirements on a cache that receives a 304 response are defined in  Section 4.3.4 of [RFC7234]: https://tools.ietf.org/html/rfc7234#section-4.3.4.\n\nPrior to this response, the client sent a conditional GET or HEAD request specifying what resource it currently has stored. Server is giving the client the “OK” to use this resource as the most updated version in order to reduce the amount of data transmission between client and server.\n\n-- Must not have message body\n-- Must contain any of the headers that would have been set prior to the mirrored 200 response: Cache-Control, Content-Location, Date,  ETag, Expires, or Vary.\n\nWhen a request is made to Cloudflare that is stale so must be revalidated at the origin, Cloudflare will send a 304 response to confirm the version in our cache matched the version at origin. The response will include the CF-Cache-Status: REVALIDATED header. and Cloudflare confirms the version using the If-Modified-Since header. For more information see: https://support.cloudflare.com/hc/en-us/articles/218505467'
 
 305:
-  message: "Use Proxy"
-  category: "Redirection Messages"
-  description: "Was defined in a previous version of the HTTP specification to \
-                indicate that a requested response must be accessed by a proxy. \
-                It has been deprecated due to security concerns regarding in-band \
-                configuration of a proxy."
+  message: 'Use Proxy'
+  category: 'Redirection Messages'
+  description: 'Request must be fulfilled through proxy URI specified in Location header instead of through the origin. This status code has been deprecated due to security risks.'
 
 306:
-  message: "Unused"
-  category: "Redirection Messages"
-  description: "This response code is no longer used, it is just reserved \
-                currently. It was used in a previous version of the HTTP 1.1 \
-                specification."
+  message: 'Unused'
+  category: 'Redirection Messages'
+  description: 'Notification that following requests must come must be directed to the proxy specified.'
 
 307:
-  message: "Temporary Redirect"
-  category: "Redirection Messages"
-  description: "The server sends this response to direct the client to get the \
-                requested resource at another URI with same method that was used \
-                in the prior request. This has the same semantics as the 302 Found \
-                HTTP response code, with the exception that the user agent must \
-                not change the HTTP method used: If a POST was used in the first \
-                request, a POST must be used in the second request."
+  message: 'Temporary Redirect'
+  category: 'Redirection Messages'
+  description: 'A redirect similar to a 302 response except that the request method (e.g. GET, POST..) must not differ from what was used in the original request if automatically following the redirect.\n\n-- User-Agent may automatically follow the Location header, but should not replace the original URI.'
 
 308:
-  message: "Permanent Redirect"
-  category: "Redirection Messages"
-  description: "This means that the resource is now permanently located at another \
-                URI, specified by the Location: HTTP Response header. This has \
-                the same semantics as the 301 Moved Permanently HTTP response \
-                code, with the exception that the user agent must not change the \
-                HTTP method used: If a POST was used in the first request, a POST \
-                must be used in the second request."
+  message: 'Permanent Redirect'
+  category: 'Redirection Messages'
+  description: 'This means that the resource is now permanently located at another \mnent redirect similar to a 301 except the request method (e.g. GET, POST..) must not differ from what was used in the original request if automatically following the redirect.\n\n-- User-Agent should automatically follow the Location header\n-- User-Agent should replace the original URI  with the updated one in the Location or payload.'
 
 # Client Error Responses
 
 400:
-  message: "Bad Request"
-  category: "Client Error Responses"
-  description: "This response means that server could not understand the request \
-                due to invalid syntax."
+  message: 'Bad Request'
+  category: 'Client Error Responses'
+  description: 'Server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).'
 
 401:
-  message: "Unauthorized"
-  category: "Client Error Responses"
-  description: "Although the HTTP standard specifies 'unauthorized', semantically \
-                this response means 'unauthenticated'. That is, the client must \
-                authenticate itself to get the requested response."
+  message: 'Unauthorized'
+  category: 'Client Error Responses'
+  description: 'Request was not sent with the proper authentication credentials\n\n--Server must send with at least one challenge in the form of a WWW-Authenticate header field according to Section 4.1: https://tools.ietf.org/html/rfc7235#section-4.1\n--Client may send a second request with same credentials and then if the challenge is identical to the one before, an entity will be provided by the server to help the client find what credentials are needed.'
 
 402:
-  message: "Payment Required"
-  category: "Client Error Responses"
-  description: "This response code is reserved for future use. Initial aim for \
-                creating this code was using it for digital payment systems \
-                however this is not used currently."
+  message: 'Payment Required'
+  category: 'Client Error Responses'
+  description: 'Not yet implemented by RFC standards, but reserved for future use'
 
 403:
-  message: "Forbidden"
-  category: "Client Error Responses"
-  description: "The client does not have access rights to the content, i.e. they \
-                are unauthorized, so server is rejecting to give proper response. \
-                Unlike 401, the client's identity is known to the server."
+  message: 'Forbidden'
+  category: 'Client Error Responses'
+  description: 'Refusal to serve an authorized request. Server is explicitly telling the client that the request was forbidden. This may not only be because of invalid credentials but also maybe for reasons the server does not wish to expose.\n\n-- Server  may include description of was the request was unauthorized in the payload\n-- Client should not repeat the identical request again\n--Servers may also choose to use 404 if wishing to conceal the resource exists\n\nCloudflare will serve 403 responses if the request violated either a default WAF rule enabled for all orange-clouded Cloudflare domains or a WAF rule enabled for that particular zone. Read more at What does the Web Application Firewall do?\n\nCloudflare will also serve a 403 Forbidden response for SSL connections to sub/domains that arent covered by any Cloudflare or uploaded SSL certificate.'
 
 404:
-  message: "Not Found"
-  category: "Client Error Responses"
-  description: "The server can not find requested resource. In the browser, this \
-                means the URL is not recognized. In an API, this can also mean \
-                that the endpoint is valid but the resource itself does not exist. \
-                Servers may also send this response instead of 403 to hide the \
-                existence of a resource from an unauthorized client. This response \
-                code is probably the most famous one due to its frequent occurence \
-                on the web."
+  message: 'Not Found'
+  category: 'Client Error Responses'
+  description: 'Origin server was unable or unwilling to find the resource requested. This usually means the host server could not find the resource. To serve a more permanent version of this error one should use a 410 error code.\n\nWebsite owners usually implement a custom page to be served when this error is generated. For example, Implementing Custom 404 pages in Apache.\n\nCloudflare does not generate 404s for customer websites, we only proxy the request on from the origin server. When seeing a 404 for your Cloudflare powered site you should contact your hosting provider for help.'
 
 405:
-  message: "Method Not Allowed"
-  category: "Client Error Responses"
-  description: "The request method is known by the server but has been disabled \
-                and cannot be used. For example, an API may forbid DELETE-ing a \
-                resource. The two mandatory methods, GET and HEAD, must never be \
-                disabled and should not return this error code."
+  message: 'Method Not Allowed'
+  category: 'Client Error Responses'
+  description: 'Origin server is aware of the requested resource, but the request method used is not supported.\n\n-- Origin server must also provide an Allow header with a list of supported targets for that resource.\n\nAn example would be a POST on an unchangeable resource the thus only accepts GET.'
 
 406:
-  message: "Not Acceptable"
-  category: "Client Error Responses"
-  description: "This response is sent when the web server, after performing \
-                server-driven content negotiation, doesn't find any content \
-                following the criteria given by the user agent."
+  message: 'Not Acceptable'
+  category: 'Client Error Responses'
+  description: 'Resource is not available at the origin that adheres to negotiation headers that were  set prior (e.g. via Accept-Charset and Accept-Language headers).\n\nThis status code can be replaced by simply serving the less preferred method to the User-Agent in lieu of generating this error.'
 
 407:
-  message: "Proxy Authentication Required"
-  category: "Client Error Responses"
-  description: "This is similar to 401 but authentication is needed to be done \
-                by a proxy."
+  message: 'Proxy Authentication Required'
+  category: 'Client Error Responses'
+  description: 'The client did not send the required authentication with the request.'
 
 408:
-  message: "Request Timeout"
-  category: "Client Error Responses"
-  description: "This response is sent on an idle connection by some servers, \
-                even without any previous request by the client. It means that \
-                the server would like to shut down this unused connection. This \
-                response is used much more since some browsers, like Chrome, \
-                Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed \
-                up surfing. Also note that some servers merely shut down the \
-                connection without sending this message."
+  message: 'Request Timeout'
+  category: 'Client Error Responses'
+  description: 'The origin server did not receive the complete request in what it considers a reasonable time.\n\n-- Implied the server does not wish to wait and continue the connection.\n-- Not used much because servers typically choose to use the “close” connection option.'
 
 409:
-  message: "Conflict"
-  category: "Client Error Responses"
-  description: "This response is sent when a request conflicts with the current \
-                state of the server."
+  message: 'Conflict'
+  category: 'Client Error Responses'
+  description: 'The request did not complete because of a conflict with the current state of the resource. Typically happens on a PUT request where multiple clients are attempting to edit the same resource.\n\n-- The server should generate a payload that includes enough information for the client to recognize the source of the conflict.\n-- Clients can and should retry the request again\n\nCloudflare will generate and serve a 409 response for a Error 1001: DNS Resolution Error.'
 
 410:
-  message: "Gone"
-  category: "Client Error Responses"
-  description: "This response would be sent when the requested content has been \
-                permanently deleted from server, with no forwarding address. \
-                Clients are expected to remove their caches and links to the \
-                resource. The HTTP specification intends this status code to be \
-                used for 'limited-time, promotional services'. APIs should not \
-                feel compelled to indicate resources that have been deleted with \
-                this status code."
+  message: 'Gone'
+  category: 'Client Error Responses'
+  description: 'The resource requested is permanently missing at the origin.\n\n-- The server is suggesting the links reference the resource should be removed.\n-- The server is not qualified to use this status code over a 404 response nor required to have this response for any specific period of time.'
 
 411:
-  message: "Length Required"
-  category: "Client Error Responses"
-  description: "Server rejected the request because the Content-Length header \
-                field is not defined and the server requires it."
+  message: 'Length Required'
+  category: 'Client Error Responses'
+  description: 'Client did not define the Content-Length of the request body in the headers and this is required to obtain the resource.\n\n-- Client may resend the request after adding the header field.'
 
 412:
-  message: "Precondition Failed"
-  category: "Client Error Responses"
-  description: "The client has indicated preconditions in its headers which the \
-                server does not meet."
+  message: 'Precondition Failed'
+  category: 'Client Error Responses'
+  description: 'Server denies the request because the resource failed to meet the conditions specified by the client.\n\nFor example of version control, a client is modifying an existing resource and thus sets the If-Unmodified-Since header to match the date that the client downloaded the resource and began edits. If the resource was edited (likely by another client) after this date and before the upload of the edits, this response will be generated since the date of the last edit will come after the date set in If-Unmodified-Since by the client.\n\nCloudflare will serve this response. For more information see: ETag Headers: https://support.cloudflare.com/hc/en-us/articles/218505467'
 
 413:
-  message: "Payload Too Large"
-  category: "Client Error Responses"
-  description: "Request entity is larger than limits defined by server; the server \
-                might close the connection or return an Retry-After header field."
+  message: 'Payload Too Large'
+  category: 'Client Error Responses'
+  description: 'Refusal from the server to process the request because the payload sent from the client is larger than the server wished to accept. Server has the optional to close the connection.\n\n-- If this refusal would only happen temporarily, then the server should send a Retry-After header to specify when the client should try the request again.'
 
 414:
-  message: "URI Too Long"
-  category: "Client Error Responses"
-  description: "Request entity is larger than limits defined by server; the server \
-                might close the connection or return an Retry-After header field."
+  message: 'URI Too Long'
+  category: 'Client Error Responses'
+  description: 'Refusal from the server that the URI was too long to be processed. For example, if a client is attempting a GET request with an unusually long URI after a POST, this could be seen as a security risk and a 414 gets generated.\n\nCloudflare will generate this response for a URI longer than 32KB'
 
 415:
-  message: "Unsupported Media Type"
-  category: "Client Error Responses"
-  description: "The media format of the requested data is not supported by the \
-                server, so the server is rejecting the request."
+  message: 'Unsupported Media Type'
+  category: 'Client Error Responses'
+  description: 'Refusal from the server to process the format of the current payload. One way to identify and fix this issue would be to look at the Content-Type or Content-Encoding headers sent in the client’s request.'
 
 416:
-  message: "Requested Range Not Satisfiable"
-  category: "Client Error Responses"
-  description: "The range specified by the Range header field in the request \
-                can't be fulfilled; it's possible that the range is outside the \
-                size of the target URI's data."
+  message: 'Requested Range Not Satisfiable'
+  category: 'Client Error Responses'
+  description: 'The range specified by the Range header field in the request \
+                cant be fulfilled; its possible that the range is outside the \
+                size of the target URIs data.'
 
 417:
-  message: "Expectation Failed"
-  category: "Client Error Responses"
-  description: "This response code means the expectation indicated by the Expect \
-                request header field can't be met by the server."
+  message: 'Expectation Failed'
+  category: 'Client Error Responses'
+  description: 'Failure of server to meet the requirements specified in the Expect header of the client’s request.'
 
 418:
-  message: "I'm a teapot"
-  category: "Client Error Responses"
-  description: "The server refuses the attempt to brew coffee with a teapot."
+  message: 'Im a teapot'
+  category: 'Client Error Responses'
+  description: 'The server refuses the attempt to brew coffee with a teapot.'
 
 421:
-  message: "Misdirected Request"
-  category: "Client Error Responses"
-  description: "The request was directed at a server that is not able to produce \
+  message: 'Misdirected Request'
+  category: 'Client Error Responses'
+  description: 'The request was directed at a server that is not able to produce \
                 a response. This can be sent by a server that is not configured \
                 to produce responses for the combination of scheme and authority \
-                that are included in the request URI."
+                that are included in the request URI.'
 
 422:
-  message: "Unprocessable Entity (WebDAV)"
-  category: "Client Error Responses"
-  description: "The request was well-formed but was unable to be followed due to \
-                semantic errors."
+  message: 'Unprocessable Entity (WebDAV)'
+  category: 'Client Error Responses'
+  description: 'The request was well-formed but was unable to be followed due to \
+                semantic errors.'
 
 423:
-  message: "Locked (WebDAV)"
-  category: "Client Error Responses"
-  description: "The resource that is being accessed is locked."
+  message: 'Locked (WebDAV)'
+  category: 'Client Error Responses'
+  description: 'The resource that is being accessed is locked.'
 
 424:
-  message: "Failed Dependency (WebDAV)"
-  category: "Client Error Responses"
-  description: "The request failed due to failure of a previous request."
+  message: 'Failed Dependency (WebDAV)'
+  category: 'Client Error Responses'
+  description: 'The request failed due to failure of a previous request.'
 
 426:
-  message: "Upgrade Required"
-  category: "Client Error Responses"
-  description: "The server refuses to perform the request using the current \
+  message: 'Upgrade Required'
+  category: 'Client Error Responses'
+  description: 'The server refuses to perform the request using the current \
                 protocol but might be willing to do so after the client upgrades \
                 to a different protocol. The server sends an Upgrade header in a \
-                426 response to indicate the required protocol(s)."
+                426 response to indicate the required protocol(s).'
 
 428:
-  message: "Precondition Required"
-  category: "Client Error Responses"
-  description: "The origin server requires the request to be conditional. Intended \
-                to prevent the 'lost update' problem, where a client GETs a resource's \
+  message: 'Precondition Required'
+  category: 'Client Error Responses'
+  description: 'The origin server requires the request to be conditional. Intended \
+                to prevent the lost update problem, where a client GETs a resources \
                 state, modifies it, and PUTs it back to the server, when meanwhile a \
                 third party has modified the state on the server, leading to a \
-                conflict."
+                conflict.'
 
 429:
-  message: "Too Many Requests"
-  category: "Client Error Responses"
-  description: "The user has sent too many requests in a given amount of time \
-                ('rate limiting')."
+  message: 'Too Many Requests'
+  category: 'Client Error Responses'
+  description: 'Client has sent too many requests in the specified amount of time according to the server. Often known as rate-limiting. Server may respond with information allowing the requester to retry after a specific period of time.\n\nCloudflare will generate and send this status code when a request is being rate limited: https://www.cloudflare.com/rate-limiting/. If visitors to your site are receiving these error codes, you will be able to see this in the Rate Limiting Analytics: https://support.cloudflare.com/hc/en-us/articles/115003414428-Rate-Limiting-Analytics.'
 
 431:
-  message: "Request Header Fields Too Large"
-  category: "Client Error Responses"
-  description: "The server is unwilling to process the request because its header \
+  message: 'Request Header Fields Too Large'
+  category: 'Client Error Responses'
+  description: 'The server is unwilling to process the request because its header \
                 fields are too large. The request MAY be resubmitted after reducing \
-                the size of the request header fields."
+                the size of the request header fields.'
 
 451:
-  message: "Unavailable For Legal Reasons"
-  category: "Client Error Responses"
-  description: "The user requests an illegal resource, such as a web page censored \
-                by a government."
+  message: 'Unavailable For Legal Reasons'
+  category: 'Client Error Responses'
+  description: 'Server is unable to deliver the resource due to legal actions.\n\nTypically search engines (e.g. Google) and ISP (e.g. ATT) are the ones affected by this response code and not the origin server.\n\n-- The response should include an explanation is the response body with details of the legal demand.'
 
+499:
+  message: 'Client Close Request'
+  category: 'Client Error Responses'
+  description: 'Nginx specific response code to indicate when the connection has been closed by the client while the server is still processing its request, making server unable to send a status code back.\n\n-- This will be shown in Enterprise Log Share: https://support.cloudflare.com/hc/en-us/articles/216672448-Enterprise-Log-Share-REST-API and status code analytics for Enterprise customers.'
+ 
 # Server Error Responses
 
 500:
-  message: "Internal Server Error"
-  category: "Server Error Responses"
-  description: "The server has encountered a situation it doesn't know how to \
-                handle."
+  message: 'Internal Server Error'
+  category: 'Server Error Responses'
+  description: 'The origin web server has encountered an unexpected condition and was unable to fulfill the request. This is a blanket error message for any internal errors that prevented the origin web server from fulfilling the request and that were not caught at the origin.\n\nIn the rare event that an exception throw with the Cloudflare edge or an internal DNS timeout occurred, Cloudflare will return a 500 with the page stating cloudflare. If you dont see this, the issue is occurring at the origin web server and you should work with your hosting provider to address the issue.'
 
 501:
-  message: "Not Implemented"
-  category: "Server Error Responses"
-  description: "The request method is not supported by the server and cannot be \
-                handled. The only methods that servers are required to support \
-                (and therefore that must not return this code) are GET and HEAD."
+  message: 'Not Implemented'
+  category: 'Server Error Responses'
+  description: 'The origin web server either does not recognize the request method, or it unable to fulfill the request. Usually, this implies future availability (e.g., an upcoming feature or web-service API).\n\nThis error is cacheable by default, unless otherwise indicated by the method definition or explicit cache controls.'
 
 502:
-  message: "Bad Gateway"
-  category: "Server Error Responses"
-  description: "This error response means that the server, while working as a \
-                gateway to get a response needed to handle the request, got an \
-                invalid response."
+  message: 'Bad Gateway'
+  category: 'Server Error Responses'
+  description: 'Back-end web servers are not communicating correctly.Three reasons why this can occur:\n\n  1. The origin web server is not configured to handle the requested domain name at the targeted IP address. This may happen when DNS records change. Keep in mind that DNS TTL determines how long a record is valid in the DNS cache.\n  2. The server at the origin is overloaded or unreachable at the time the request was made. This could be due to the server crashing, traffic spikes, or lack of connectivity to the server.\n  3. An application or service used at your origin is either timing out or being blocked.\n\n
+  If the error includes Cloudflare branding, then its coming directly from the origin server.\n\nIn the unlikely to see a 502 error without the branding shown above but with “cloudflare” (see image below). If you see the error version shown below, file a support ticket immediately and include the output of your site CND trace (go to yoursite.com/cdn-cgi/trace and copy/paste the contents). This means there are potential issues at the local Cloudflare data center.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 502 error?: https://support.cloudflare.com/hc/en-us/articles/218378978'
 
 503:
-  message: "Service Unavailable"
-  category: "Server Error Responses"
-  description: "The server is not ready to handle the request. Common causes are \
-                a server that is down for maintenance or that is overloaded. Note \
-                that together with this response, a user-friendly page explaining \
-                the problem should be sent. This responses should be used for \
-                temporary conditions and the Retry-After: HTTP header should, \
-                if possible, contain the estimated time before the recovery of \
-                the service. The webmaster must also take care about the \
-                caching-related headers that are sent along with this response, \
-                as these temporary condition responses should usually not be \
-                cached."
+  message: 'Service Unavailable'
+  category: 'Server Error Responses'
+  description: 'The origin web server is overloaded or having maintenance issues and unable to handle the request at this time.\n\nThe retry header may be included by the server to specify an appropriate time for the client to retry the request.\n\nNote that not all web servers will serve this response. Some will simply refuse or drop the connection. If a drop in communication happens from the origin web server to Cloudflare, a 522 error response is generated.\n\nCloudflare will serve a 503 under the following circumstances:\n\n-- A 503 is returned from your origin web server.\n-- I’m Under Attack mode is enabled.\n-- The Always Online feature was triggered.\n\nFor more Cloudflare relevant information see: Why am I getting a 503 Error?: https://support.cloudflare.com/hc/en-us/articles/200171896-Why-am-I-getting-a-503-Service-Temporarily-Unavailable-error-message-'
 
 504:
-  message: "Gateway Timeout"
-  category: "Server Error Responses"
-  description: "This error response is given when the server is acting as a \
-                gateway and cannot get a response in time."
+  message: 'Gateway Timeout'
+  category: 'Server Error Responses'
+  description: 'This error might appear while connecting to an upstream server on the backend. A gateway or proxy is trying to reach the origin web server and while waiting for a response, the connection timed out.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 504 error?: https://support.cloudflare.com/hc/en-us/articles/218378978-What-should-I-do-after-seeing-a-502-or-504-gateway-error-on-my-site-'
 
 505:
-  message: "HTTP Version Not Supported"
-  category: "Server Error Responses"
-  description: "The HTTP version used in the request is not supported by the server."
+  message: 'HTTP Version Not Supported'
+  category: 'Server Error Responses'
+  description: 'The origin web server cannot or does not wish to support the HTTP version requested by the client.\n\nThe server should indicate why it would not support that version.'
 
 506:
-  message: "Variant Also Negotiates"
-  category: "Server Error Responses"
-  description: "The server has an internal configuration error: transparent \
-                content negotiation for the request results in a circular reference."
+  message: 'Variant Also Negotiates'
+  category: 'Server Error Responses'
+  description: 'The server has an internal configuration error: transparent \
+                content negotiation for the request results in a circular reference.'
 
 507:
-  message: "Insufficient Storage"
-  category: "Server Error Responses"
-  description: "The server has an internal configuration error: the chosen \
+  message: 'Insufficient Storage'
+  category: 'Server Error Responses'
+  description: 'The server has an internal configuration error: the chosen \
                 variant resource is configured to engage in transparent content \
                 negotiation itself, and is therefore not a proper end point in \
-                the negotiation process."
+                the negotiation process.'
 
 508:
-  message: "Loop Detected (WebDAV)"
-  category: "Server Error Responses"
-  description: "The server detected an infinite loop while processing the request."
+  message: 'Loop Detected (WebDAV)'
+  category: 'Server Error Responses'
+  description: 'The server detected an infinite loop while processing the request.'
 
 510:
-  message: "Not Extended"
-  category: "Server Error Responses"
-  description: "Further extensions to the request are required for the server to \
-                fulfill it."
+  message: 'Not Extended'
+  category: 'Server Error Responses'
+  description: 'Further extensions to the request are required for the server to \
+                fulfill it.'
 
 511:
-  message: "Network Authentication Required"
-  category: "Server Error Responses"
-  description: "The 511 status code indicates that the client needs to authenticate \
-                to gain network access."
+  message: 'Network Authentication Required'
+  category: 'Server Error Responses'
+  description: 'The 511 status code indicates that the client needs to authenticate \
+                to gain network access.'
+520:
+  message: 'Unknown Error from Web Server'
+  category: 'Server Error Responses'
+  description: 'This is a catch-all response for when the origin web server returns something unexpected or something that is not tolerated/interpreted (protocol violation or empty response).\n\nWhile the 520 error can be triggered by very unique and strange edge-case scenarios, they are generally caused by:\n\n  - Connection resets (following a successful TCP handshake)\n  - Headers exceed the Cloudflare header size limit (over 8kb)\n  - An empty response from origin\n  - An invalid HTTP response\n  - Missing response headers from an HTTP response\n  - Presence of multiple Content-Length headers\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 520 error?: (https://support.cloudflare.com/hc/en-us/articles/200171936-Error-520-Web-server-is-returning-an-unknown-error)'
+
+521:
+  message: 'Web Server is down'
+  category: 'Server Error Responses'
+  description: 'This error response indicates the origin web server refused the connection from Cloudflare. This means Cloudflare tried to connect to your origin web server on port 80 or 443 but received a connection refused error. The origin web server is actively refusing the request, so this is not a network error.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 521 error? (https://support.cloudflare.com/hc/en-us/articles/200171916)'
+
+522:
+  message: 'Connection Timed Out'
+  category: 'Server Error Responses'
+  description: 'This Error response occurs when establishing a TCP connection with the origin web server and Cloudflare.\n\nWhen someone visits a Cloudflare-enabled website, a connection is established between Cloudflare and the sites origin web server. To establish a connection, TCP uses a three-way handshake.\n\n  1. SYN: Cloudflare sends three SYN packets to the origin server.\n  2. SYN+ACK: In response, the origin server replies with a SYN+ACK.\n  3. ACK: Finally, Cloudflare sends an ACK back to the origin server.\n\nAt this point, both Cloudflare and the origin server have received an acknowledgement that the connection and communication was established. If the origin web server does not send a SYN+ACK back to Cloudflare within 15 seconds, a 522 error will occur and the connection is closed.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 522 error? (https://support.cloudflare.com/hc/en-us/articles/200171906)'
+
+523:
+  message: 'Origin is Unreachable'
+  category: 'Server Error Responses'
+  description: 'Error 523 indicates that an issue with the origin web server has occurred and the site is unreachable.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: More information at Error 523: Origin is Unreachable (https://support.cloudflare.com/hc/en-us/articles/200171946)'
+
+524:
+  message: 'A timeout occured'
+  category: 'Server Error Responses'
+  description: 'Cloudflare was able to make a TCP connection to the origin, but the origin did not reply with an HTTP response before the connection timed out. The Cloudflare edge will typically wait for an HTTP response from your server for 100 seconds.\n\nIf no response is sent by your server in that time, we close the connection and serve a 524 error page.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: Why am I getting a 504 error?: https://support.cloudflare.com/hc/en-us/articles/218378978-What-should-I-do-after-seeing-a-502-or-504-gateway-error-on-my-site-'
+
+525:
+  message: 'SSL handshake failed'
+  category: 'Server Error Responses'
+  description: 'This error indicates that a failure in the SSL handshake (http://en.wikipedia.org/wiki/Transport_Layer_SecurityBasic_TLS_handshake) between Cloudflare and the origin server that hosts the domain has occurred. This means that Cloudflare is set to use Full SSL in the Cloudflare settings (https://www.cloudflare.com/cloudflare-settings) for the domain, so Cloudflare attempts to make a connection using SSL (for requests beginning in https://) to the web server that hosts the domain.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information see: https://support.cloudflare.com/hc/en-us/articles/200278659'
+
+526:
+  message: 'Invalid SSL certificate'
+  category: 'Server Error Responses'
+  description: 'This error happens where theres a problem validating the SSL certificate on the origin web server and the Cloudflare SSL configuration (https://www.cloudflare.com/cloudflare-settings) on the website is set to Full SSL (Strict). More information at Error 526: Invalid SSL Certificate: (https://support.cloudflare.com/hc/en-us/articles/200721975-Error-526-Invalid-SSL-certificate)'
+
+527:
+  message: 'Railgun Listener to Origin Error'
+  category: 'Server Error Responses'
+  description: 'The request timed out or failed after the WAN connection had been established. This could result from an interruption or anomaly upstream from the Railgun Sender in the path to the Listener at the site origin web server.\n\n527 error could also occur due to an issue within the host environment when the Railgun Listener is unable to complete or establish a connection to the origin web server to receive a requested page.\n\nIf Always Online is enabled, this status code will trigger an Always Online page:https://support.cloudflare.com/hc/en-us/articles/200168006 to be served. For more Cloudflare relevant information at Error 527: Railgun Listener to Origin Error (https://support.cloudflare.com/hc/en-us/articles/217891268)' 
+
+530:
+  message: 'Origin DNS Error'
+  category: 'Server Error Responses'
+  description: 'Cloudflare cannot resolve the A or CNAME DNS record requested. Even if Cloudflare’s Anycast (https://blog.cloudflare.com/a-brief-anycast-primer/) address is resolving correctly, the record that should be specified in the DNS app of your Cloudflare dashboard cannot be found or is a CNAME record to an external domain that cannot be resolved.\n\nThe Error Message the browser will see will show a 1016 error, but the actual HTTP response code is 530.\n\nMore information at Error 530: Origin DNS Error (https://support.cloudflare.com/hc/en-us/articles/234979888)'
+
