@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.py
+cfman/__init__.py
+cfman/__main__.py
+cfman/cfman.py
+cfman/code_descriptions.yml
+cfman.egg-info/PKG-INFO
+cfman.egg-info/SOURCES.txt
+cfman.egg-info/dependency_links.txt
+cfman.egg-info/entry_points.txt
+cfman.egg-info/requires.txt
+cfman.egg-info/top_level.txt

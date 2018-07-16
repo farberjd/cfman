@@ -1,0 +1,3 @@
+[console_scripts]
+cfman = cfman.cfman:main
+
