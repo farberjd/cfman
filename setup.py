@@ -7,7 +7,7 @@ from codecs import open
 setup(
     name="cfman",
     description="CFMan Pages for Status Codes",
-    version="v2.0.3",
+    version="v2.0.5",
     install_requires=["pyyaml", "urwid"],
     packages=["cfman"],
     entry_points={"console_scripts": ["cfman = cfman.cfman:main"]},
